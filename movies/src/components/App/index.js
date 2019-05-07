@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Link to="/">
+        <Link to="/Board">
           <p data-testid="welcome-message">{welcomeMessage}</p>
         </Link>
       </div>

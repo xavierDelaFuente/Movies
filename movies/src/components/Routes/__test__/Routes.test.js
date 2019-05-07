@@ -5,22 +5,26 @@ import { MemoryRouter } from "react-router-dom";
 
 describe("[Component]: Routes:", () => {
   let wrapper;
-  beforeEach(() => {
-    wrapper = mount(
-      <MemoryRouter initialEntries={["/"]}>
-        <Routes />
-      </MemoryRouter>
-    );
-  });
-
-  test("renders without crashing", () => {
-    expect(wrapper).toHaveLength(1);
-  });
 
   describe("Rerders desired routes to components:", () => {
     test("renders an App component in the 'default' route", () => {
+      wrapper = mount(
+        <MemoryRouter initialEntries={["/"]}>
+          <Routes />
+        </MemoryRouter>
+      );
       expect(wrapper.find(`[data-testid='home']`)).toHaveLength(1);
       expect(wrapper.find(`[data-testid='home']`).props().path).toBe("/");
+    });
+
+    test("renders an App component in the 'default' route", () => {
+      wrapper = mount(
+        <MemoryRouter initialEntries={["/Board"]}>
+          <Routes />
+        </MemoryRouter>
+      );
+      expect(wrapper.find(`[data-testid='board']`)).toHaveLength(1);
+      expect(wrapper.find(`[data-testid='board']`).props().path).toBe("/Board");
     });
   });
 });
