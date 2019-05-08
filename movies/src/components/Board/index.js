@@ -1,24 +1,49 @@
-import React from "react";
-import { uid } from "react-uid";
+import React, { Component } from "react";
 import "./Board.css";
-import fakeMoviesJson from "../../texts/fakeData";
 
-function Board() {
-  const Movie = ({ id, rank, title }) => (
-    <div className="movie" key={uid(title)} data-testid="movie">
-      <div>{id}</div>
-      <div>{rank}</div>
-      <div>{title}</div>
-    </div>
-  );
+import MoviesList from "../MoviesList";
 
-  return (
-    <div className="board" data-testid="board">
-      <div className="movies" data-testid="movies-container">
-        {fakeMoviesJson && fakeMoviesJson.map(movie => Movie(movie))}
+class Board extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      movies: []
+    };
+    this.apiKey = process.env.REACT_APP_KEY;
+    this.handleOnChange = this.handleOnChange.bind(this);
+  }
+
+  handleOnChange({ target: { value } }) {
+    fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${
+        this.apiKey
+      }&query=${value}`
+    )
+      .then(response => response.json())
+      .then(response => {
+        this.setState({ movies: { ...response.results } });
+      });
+  }
+
+  render() {
+    const { movies } = this.state;
+
+    return (
+      <div className="board" data-testid="board">
+        <form className="search--form">
+          <div className="search--container">
+            <input
+              className="search--input"
+              placeholder="Search"
+              onChange={this.handleOnChange}
+            />
+          </div>
+        </form>
+
+        <MoviesList movies={movies} />
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Board;
