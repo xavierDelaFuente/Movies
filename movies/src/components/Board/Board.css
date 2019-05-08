@@ -1,3 +1,7 @@
+.movies {
+  padding: 8px;
+}
+
 .movie {
   width: 31%;
   border: 2px solid #333;
@@ -10,4 +14,26 @@
   float: left;
   margin-right: 10px;
   text-align: center;
+  padding: 8px;
+}
+
+.search--form {
+  overflow: hidden;
+  padding: 8px;
+}
+
+.search--container {
+  padding: 16px;
+  background-color: salmon;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px #ff7c7c, 0 0 0 20px #ffff;
+  display: flex;
+  justify-content: center;
+}
+
+.search--input {
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 60px;
 }
