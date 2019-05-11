@@ -1,8 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import MoviesList from "../";
-import { MemoryRouter } from "react-router-dom";
-import fakeMoviesJson from "../../__mocks/fakeData";
+import fakeMoviesJson from "../../__mocks/fakeMovies";
 
 describe("[Component]: Board:", () => {
   let wrapper;
