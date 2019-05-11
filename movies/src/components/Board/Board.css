@@ -17,23 +17,24 @@
   padding: 8px;
 }
 
-.search--form {
-  overflow: hidden;
-  padding: 8px;
+.is-scrollable {
+  overflow-y: scroll;
 }
 
-.search--container {
-  padding: 16px;
-  background-color: salmon;
-  border-radius: 8px;
-  box-shadow: 0 10px 40px #ff7c7c, 0 0 0 20px #ffff;
-  display: flex;
-  justify-content: center;
+.is-scrollable::-webkit-scrollbar {
+  width: 10px;
 }
 
-.search--input {
-  border: none;
-  background-color: transparent;
-  color: white;
-  font-size: 60px;
+.is-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 1em;
+}
+
+.is-scrollable::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background: #888;
+}
+
+.is-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

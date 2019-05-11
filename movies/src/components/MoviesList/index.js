@@ -6,11 +6,14 @@ import "./MoviesList.css";
 const MoviesList = ({ movies }) => {
   return (
     <div className="movies" data-testid="movies-container">
-      {Object.values(movies) &&
-        Object.values(movies).map(movie => (
+      {movies &&
+        movies.map(movie => (
           <div className="movie" key={uid(movie.title)} data-testid="movie">
             <h2>{movie.title}</h2>
-            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt=""
+            />
             <div className="movie--row">
               <span>popularity</span>
               <div>{movie.popularity}</div>

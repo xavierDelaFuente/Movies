@@ -17,7 +17,8 @@ describe("[Component]: Board:", () => {
   describe("Rerders desired components:", () => {
     test("renders a Board a movies container with a list of movies and a search", () => {
       expect(wrapper.find(`[data-testid='board']`)).toHaveLength(1);
-      expect(wrapper.find(`[data-testid='movies-container']`)).toHaveLength(1);
+      expect(wrapper.find(`Header`)).toHaveLength(1);
+      expect(wrapper.find(`MoviesList`)).toHaveLength(1);
     });
 
     test("renders no movies on inital rendering", () => {

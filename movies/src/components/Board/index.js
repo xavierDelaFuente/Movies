@@ -2,45 +2,89 @@ import React, { Component } from "react";
 import "./Board.css";
 
 import MoviesList from "../MoviesList";
+import Header from "../Header";
 
 class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: []
+      movies: [],
+      categories: [],
+      selectedCategory: 0
     };
     this.apiKey = process.env.REACT_APP_KEY;
-    this.handleOnChange = this.handleOnChange.bind(this);
+    this.defaultSearchValue = "a";
+    this.handleOnSearchChange = this.handleOnSearchChange.bind(this);
+    this.handleOnCategoryChange = this.handleOnCategoryChange.bind(this);
+    this._filterByCategory = this._filterByCategory.bind(this);
   }
 
-  handleOnChange({ target: { value } }) {
+  componentDidMount() {
+    if (!this.state.categories.length) {
+      fetch(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${
+          this.apiKey
+        }&language=en-US`
+      )
+        .then(response => response.json())
+        .then(response => {
+          this.setState({ categories: [...response.genres] });
+        })
+        .catch(error => console.log(error));
+    }
+    if (!this.state.movies.length) {
+      fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${
+          this.apiKey
+        }&query=${this.defaultSearchValue}`
+      )
+        .then(response => response.json())
+        .then(response => {
+          this.setState({ movies: [...response.results] });
+        })
+        .catch(error => console.log(error));
+    }
+  }
+
+  handleOnCategoryChange({ target: { value } }) {
+    this.setState({ selectedCategory: parseInt(value) });
+  }
+
+  handleOnSearchChange({ target: { value } }) {
+    const queryValues = value === "" ? this.defaultSearchValue : value;
     fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${
         this.apiKey
-      }&query=${value}`
+      }&query=${queryValues}`
     )
       .then(response => response.json())
       .then(response => {
-        this.setState({ movies: { ...response.results } });
-      });
+        this.setState({ movies: [...response.results] });
+      })
+      .catch(error => console.log(error));
   }
 
+  _filterByCategory(movies) {
+    const { selectedCategory } = this.state;
+    let filteredMovies = [];
+    selectedCategory !== 0
+      ? (filteredMovies = movies.filter(movie =>
+          movie.genre_ids.includes(selectedCategory)
+        ))
+      : (filteredMovies = movies);
+    return filteredMovies;
+  }
   render() {
-    const { movies } = this.state;
+    const { movies, categories } = this.state;
 
     return (
       <div className="board" data-testid="board">
-        <form className="search--form">
-          <div className="search--container">
-            <input
-              className="search--input"
-              placeholder="Search"
-              onChange={this.handleOnChange}
-            />
-          </div>
-        </form>
-
-        <MoviesList movies={movies} />
+        <Header
+          onSearchChange={this.handleOnSearchChange}
+          onCategoryChange={this.handleOnCategoryChange}
+          categories={categories}
+        />
+        <MoviesList movies={this._filterByCategory(movies)} />
       </div>
     );
   }
