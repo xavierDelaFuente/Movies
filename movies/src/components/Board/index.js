@@ -8,8 +8,6 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [],
-      categories: [],
       selectedCategory: 0
     };
     this.apiKey = process.env.REACT_APP_KEY;
@@ -20,29 +18,12 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    if (!this.state.categories.length) {
-      fetch(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${
-          this.apiKey
-        }&language=en-US`
-      )
-        .then(response => response.json())
-        .then(response => {
-          this.setState({ categories: [...response.genres] });
-        })
-        .catch(error => console.log(error));
+    const { categories, movies, getDBCategories, getDBMovies } = this.props;
+    if (!categories) {
+      getDBCategories({ key: this.apiKey });
     }
-    if (!this.state.movies.length) {
-      fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${
-          this.apiKey
-        }&query=${this.defaultSearchValue}`
-      )
-        .then(response => response.json())
-        .then(response => {
-          this.setState({ movies: [...response.results] });
-        })
-        .catch(error => console.log(error));
+    if (!movies) {
+      getDBMovies({ key: this.apiKey, value: this.defaultSearchValue });
     }
   }
 
@@ -51,17 +32,9 @@ class Board extends Component {
   }
 
   handleOnSearchChange({ target: { value } }) {
+    const { getDBMovies } = this.props;
     const queryValues = value === "" ? this.defaultSearchValue : value;
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${
-        this.apiKey
-      }&query=${queryValues}`
-    )
-      .then(response => response.json())
-      .then(response => {
-        this.setState({ movies: [...response.results] });
-      })
-      .catch(error => console.log(error));
+    getDBMovies({ key: this.apiKey, value: queryValues });
   }
 
   _filterByCategory(movies) {
@@ -75,16 +48,18 @@ class Board extends Component {
     return filteredMovies;
   }
   render() {
-    const { movies, categories } = this.state;
+    const { movies, categories } = this.props;
 
     return (
       <div className="board" data-testid="board">
-        <Header
-          onSearchChange={this.handleOnSearchChange}
-          onCategoryChange={this.handleOnCategoryChange}
-          categories={categories}
-        />
-        <MoviesList movies={this._filterByCategory(movies)} />
+        {categories && (
+          <Header
+            onSearchChange={this.handleOnSearchChange}
+            onCategoryChange={this.handleOnCategoryChange}
+            categories={categories}
+          />
+        )}
+        {movies && <MoviesList movies={this._filterByCategory(movies)} />}
       </div>
     );
   }

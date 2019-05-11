@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import App from "../App";
-import Board from "../Board";
+import App from "../../containers/App";
+import Board from "../../containers/Board";
 
 class Routes extends Component {
   render() {
