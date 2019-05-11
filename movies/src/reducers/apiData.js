@@ -6,16 +6,10 @@ import {
 
 const initialState = {
   apiResponse: {},
-  error: null,
-  character: -1
 };
 
 const apiData = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_API_REQUEST:
-      return { ...state, error: action.error };
-    case FETCH_API_FAILURE:
-      return { ...state, error: null };
     case FETCH_API_SUCCESS:
       return {
         ...state,
@@ -24,6 +18,8 @@ const apiData = (state = initialState, action) => {
           [action.apiResponse.key]: action.apiResponse.value
         }
       };
+    case FETCH_API_REQUEST:
+    case FETCH_API_FAILURE:
     default:
       return state;
   }
