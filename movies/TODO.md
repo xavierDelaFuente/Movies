@@ -3,19 +3,19 @@
 
 # [x] Create a simple app –with Babel– using React, Redux and a router of your election
   [x] React
-  [ ] Redux
+  [x] Redux
 
-# [] Choose the build tool you prefer – we like Webpack
+# [x] Choose the build tool you prefer – we like Webpack
 
 # [x] Use any open API: TheMovieDatabase API
 
 # [ ] The app should contain:
   [ ] A home page listing several categories of items
-    [ ] List movies by category
-    [ ] Filter page movies on category change
+    [x] List movies by category
+    [x] Filter page movies on category change
     [ ] 
   [ ] A list page to show the items of a selected list 
-    [ ] page shows items and filters to apply to them
+    [x] page shows items and filters(category) to apply to them
     [ ] 
   [ ] A detail page of an item with more information
     [ ] Open detail information on item click
