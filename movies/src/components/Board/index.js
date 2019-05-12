@@ -2,45 +2,75 @@ import React, { Component } from "react";
 import "./Board.css";
 
 import MoviesList from "../MoviesList";
+import Header from "../Header";
 
 class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: []
+      selectedCategory: 0
     };
     this.apiKey = process.env.REACT_APP_KEY;
-    this.handleOnChange = this.handleOnChange.bind(this);
+    this.defaultSearchValue = "a";
+    this.handleOnSearchChange = this.handleOnSearchChange.bind(this);
+    this.handleOnCategoryChange = this.handleOnCategoryChange.bind(this);
+    this.handleOnMovieClick = this.handleOnMovieClick.bind(this);
+    this._filterByCategory = this._filterByCategory.bind(this);
   }
 
-  handleOnChange({ target: { value } }) {
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${
-        this.apiKey
-      }&query=${value}`
-    )
-      .then(response => response.json())
-      .then(response => {
-        this.setState({ movies: { ...response.results } });
-      });
+  componentDidMount() {
+    const { categories, movies, getDBCategories, getDBMovies } = this.props;
+    if (!categories) {
+      getDBCategories({ key: this.apiKey });
+    }
+    if (!movies) {
+      getDBMovies({ key: this.apiKey, value: this.defaultSearchValue });
+    }
   }
 
+  handleOnCategoryChange({ target: { value } }) {
+    this.setState({ selectedCategory: parseInt(value) });
+  }
+
+  handleOnSearchChange({ target: { value } }) {
+    const { getDBMovies } = this.props;
+    const queryValues = value === "" ? this.defaultSearchValue : value;
+    getDBMovies({ key: this.apiKey, value: queryValues });
+  }
+
+  handleOnMovieClick({ value }) {
+    const { selectMovie } = this.props;
+    selectMovie({ value });
+  }
+
+  _filterByCategory(movies) {
+    const { selectedCategory } = this.state;
+    let filteredMovies = [];
+    selectedCategory !== 0
+      ? (filteredMovies = movies.filter(movie =>
+          movie.genre_ids.includes(selectedCategory)
+        ))
+      : (filteredMovies = movies);
+    return filteredMovies;
+  }
   render() {
-    const { movies } = this.state;
+    const { movies, categories } = this.props;
 
     return (
       <div className="board" data-testid="board">
-        <form className="search--form">
-          <div className="search--container">
-            <input
-              className="search--input"
-              placeholder="Search"
-              onChange={this.handleOnChange}
-            />
-          </div>
-        </form>
-
-        <MoviesList movies={movies} />
+        {categories && (
+          <Header
+            onSearchChange={this.handleOnSearchChange}
+            onCategoryChange={this.handleOnCategoryChange}
+            categories={categories}
+          />
+        )}
+        {movies && (
+          <MoviesList
+            movies={this._filterByCategory(movies)}
+            onMovieClick={this.handleOnMovieClick}
+          />
+        )}
       </div>
     );
   }
