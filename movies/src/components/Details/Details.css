@@ -1,0 +1,31 @@
+.movie--details {
+  border: 2px solid #333;
+  border-radius: 4px;
+  margin-bottom: 25px;
+  padding-right: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  padding: 8px;
+  display: flex;
+  margin: 8px;
+  background: #bac7c7;
+}
+.movie--details__img {
+  height: 600px;
+}
+
+.movie--details__info {
+  display: flex;
+  margin: 8px;
+  padding: 8px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.details--header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

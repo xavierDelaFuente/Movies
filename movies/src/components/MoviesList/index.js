@@ -27,20 +27,8 @@ const MoviesList = ({ movies, onMovieClick }) => {
                 <div>{movie.popularity}</div>
               </div>
               <div className="movie--row">
-                <span>adult</span>
-                <div>{movie.adult}</div>
-              </div>
-              <div className="movie--row">
                 <span>original_language</span>
                 <div>{movie.original_language}</div>
-              </div>
-              <div className="movie--row">
-                <span>original_title</span>
-                <div>{movie.original_title}</div>
-              </div>
-              <div className="movie--row">
-                <span>overview</span>
-                <div>{movie.overview}</div>
               </div>
               <div className="movie--row">
                 <span>popularity</span>
@@ -53,10 +41,6 @@ const MoviesList = ({ movies, onMovieClick }) => {
               <div className="movie--row">
                 <span>vote_average</span>
                 <div>{movie.vote_average}</div>
-              </div>
-              <div className="movie--row">
-                <span>vote_count</span>
-                <div>{movie.vote_count}</div>
               </div>
             </Link>
           </div>
