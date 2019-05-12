@@ -1,5 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
+import { MemoryRouter } from "react-router-dom";
 import MoviesList from "../";
 import fakeMoviesJson from "../../__mocks/fakeMovies";
 
@@ -7,11 +8,15 @@ describe("[Component]: Board:", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<MoviesList movies={fakeMoviesJson} />);
+    wrapper = mount(
+      <MemoryRouter initialEntries={["/"]}>
+        <MoviesList movies={fakeMoviesJson} />
+      </MemoryRouter>
+    );
   });
 
   describe("Rerders desired components:", () => {
-    test("renders a Board a movies container with a list of movies and a search", () => {
+    test("renders as many movies as it receives as props", () => {
       expect(wrapper.find(`.movie`)).toHaveLength(fakeMoviesJson.length);
     });
   });

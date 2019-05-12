@@ -5,17 +5,20 @@ import {
 } from "../actions/types/apiData";
 
 const initialState = {
-  apiResponse: {},
+  apiResponse: {}
 };
 
 const apiData = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_API_SUCCESS:
+      const {
+        apiResponse: { key, value }
+      } = action;
       return {
         ...state,
         apiResponse: {
           ...state.apiResponse,
-          [action.apiResponse.key]: action.apiResponse.value
+          [key]: value
         }
       };
     case FETCH_API_REQUEST:

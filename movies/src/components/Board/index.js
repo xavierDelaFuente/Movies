@@ -14,6 +14,7 @@ class Board extends Component {
     this.defaultSearchValue = "a";
     this.handleOnSearchChange = this.handleOnSearchChange.bind(this);
     this.handleOnCategoryChange = this.handleOnCategoryChange.bind(this);
+    this.handleOnMovieClick = this.handleOnMovieClick.bind(this);
     this._filterByCategory = this._filterByCategory.bind(this);
   }
 
@@ -35,6 +36,11 @@ class Board extends Component {
     const { getDBMovies } = this.props;
     const queryValues = value === "" ? this.defaultSearchValue : value;
     getDBMovies({ key: this.apiKey, value: queryValues });
+  }
+
+  handleOnMovieClick({ value }) {
+    const { selectMovie } = this.props;
+    selectMovie({ value });
   }
 
   _filterByCategory(movies) {
@@ -59,7 +65,12 @@ class Board extends Component {
             categories={categories}
           />
         )}
-        {movies && <MoviesList movies={this._filterByCategory(movies)} />}
+        {movies && (
+          <MoviesList
+            movies={this._filterByCategory(movies)}
+            onMovieClick={this.handleOnMovieClick}
+          />
+        )}
       </div>
     );
   }

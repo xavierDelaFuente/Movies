@@ -14,7 +14,9 @@ describe("[Component]: Board:", () => {
         categories={fakeCategoriesJson}
         onCategoryChange={categoryChange}
         onSearchChange={searchChange}
-      />
+      >
+        <div className="test">HEllO</div>
+      </Header>
     );
   });
 
@@ -23,6 +25,9 @@ describe("[Component]: Board:", () => {
       expect(
         wrapper.find(`[data-testid="search--categories-option"]`)
       ).toHaveLength(fakeCategoriesJson.length);
+    });
+    test("renders children element if provided", () => {
+      expect(wrapper.find(`.test`)).toHaveLength(1);
     });
   });
   describe("Works as desired:", () => {
