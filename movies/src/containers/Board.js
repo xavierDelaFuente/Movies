@@ -1,13 +1,16 @@
 import { connect } from "react-redux";
 import { fetchCategories, fetchMovies } from "../actions/creators/apiData";
+import { setSelectMovie } from "../actions/creators/movies";
 import Board from "../components/Board";
-import selectApiData from "../selectors/apiData";
+import selectMovies from "../selectors/movies";
+import selectCategories from "../selectors/categories";
 
 const mapStateToProps = (state, ownProps) => {
-  const ApiData = selectApiData(state);
+  const categories = selectCategories(state);
+  const movies = selectMovies(state);
   return {
-    movies: ApiData.movies,
-    categories: ApiData.categories
+    movies: movies,
+    categories: categories
   };
 };
 
@@ -18,6 +21,9 @@ const mapDispatchToProps = dispatch => {
     },
     getDBMovies: ({ key, value }) => {
       dispatch(fetchMovies({ key, value }));
+    },
+    selectMovie: ({ value }) => {
+      dispatch(setSelectMovie({ value }));
     }
   };
 };

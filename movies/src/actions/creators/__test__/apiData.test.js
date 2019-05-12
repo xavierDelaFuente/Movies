@@ -1,25 +1,24 @@
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-import * as actions from '../apiData'
-import * as types from '../../types/apiData'
-import fetchMock from 'fetch-mock'
+import configureMockStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import * as actions from "../apiData";
+import * as types from "../../types/apiData";
+import fetchMock from "fetch-mock";
 
-describe('actions', () => {
-  it('should create an register the fetch has failed', () => {
+describe("actions", () => {
+  it("should create an register the fetch has failed", () => {
     const expectedAction = {
       type: types.FETCH_API_FAILURE
-    }
-    expect(actions.APIFailure()).toEqual(expectedAction)
-  })
+    };
+    expect(actions.APIFailure()).toEqual(expectedAction);
+  });
 
-  it('should create an register the fetch has started', () => {
+  it("should create an register the fetch has started", () => {
     const expectedAction = {
       type: types.FETCH_API_REQUEST
-    }
-    expect(actions.APIRequest()).toEqual(expectedAction)
-  })
-})
-
+    };
+    expect(actions.APIRequest()).toEqual(expectedAction);
+  });
+});
 
 // const middlewares = [thunk]
 // const mockStore = configureMockStore(middlewares)
@@ -38,7 +37,7 @@ describe('actions', () => {
 //     const expectedActions = [
 //       { type: types.FETCH_CATEGORIES },
 //       { type: types.FETCH_API_SUCCESS, body: { todos: ['do something'] } }
-//     ]	
+//     ]
 //     const store = mockStore({ todos: [] })
 
 //     return store.dispatch(actions.fetchCategories({ key: 'asduyasid'})).then(() => {
