@@ -17,8 +17,9 @@
   [ ] A list page to show the items of a selected list 
     [x] page shows items and filters(category) to apply to them
     [ ] 
-  [ ] A detail page of an item with more information
-    [ ] Open detail information on item click
+  [x] A detail page of an item with more information
+    [x] Open detail information on item click
+    [x] Go back to Menu
     [ ] 
 
 # [ ] Nice-to-have features:
@@ -30,21 +31,18 @@
 
 # [ ] Test as much as you can
 
-# [ ] Pagination -infinite scroll– 
+# [x] Pagination -infinite scroll– 
 
 # [ ] SSR not mandatory but desirable
 
-# [ ] Create a README file with some documentation
+# [x] Create a README file with some documentation
 
 Ways to send us the code:
 
-# [ ] Upload it to a repo on GitHub
-
-# [ ] Send us a .zip file
-
-# [ ] give us access to the code 
-  [ ] deploy: https://movies-example-myth.herokuapp.com/
-  [ ] github: https://github.com/xavierDelaFuente/movies/tree/master/movies
+# [x] Upload it to a repo on GitHub
+# [x] give us access to the code 
+  [x] deploy: https://movies-example-myth.herokuapp.com/
+  [x] github: https://github.com/xavierDelaFuente/movies/tree/master/movies
 
 
   ## Other

@@ -5,10 +5,6 @@ import "./Details.css";
 import Header from "../Header";
 
 class Details extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { movie } = this.props;
 
@@ -36,41 +32,44 @@ class Details extends Component {
             />
           </div>
           <div className="movie--details__info">
-            <div className="movie--column">
-              <span>popularity</span>
-              <div>{movie.popularity}</div>
-            </div>
-            <div className="movie--column">
-              <span>adult</span>
-              <div>{movie.adult}</div>
-            </div>
-            <div className="movie--column">
-              <span>original_language</span>
-              <div>{movie.original_language}</div>
-            </div>
-            <div className="movie--column">
-              <span>original_title</span>
-              <div>{movie.original_title}</div>
-            </div>
-            <div className="movie--column">
-              <span>overview</span>
+            <div>
+              <h2>overview</h2>
               <div>{movie.overview}</div>
             </div>
-            <div className="movie--column">
-              <span>popularity</span>
-              <div>{movie.popularity}</div>
-            </div>
-            <div className="movie--column">
-              <span>release_date</span>
-              <div>{movie.release_date}</div>
-            </div>
-            <div className="movie--column">
-              <span>vote_average</span>
-              <div>{movie.vote_average}</div>
-            </div>
-            <div className="movie--column">
-              <span>vote_count</span>
-              <div>{movie.vote_count}</div>
+            <div className="movie--details__info-container">
+              <div className="movie--column">
+                <span>popularity</span>
+                <div>{movie.popularity}</div>
+              </div>
+              <div className="movie--column">
+                <span>adult</span>
+                <div>{movie.adult}</div>
+              </div>
+              <div className="movie--column">
+                <span>original_language</span>
+                <div>{movie.original_language}</div>
+              </div>
+              <div className="movie--column">
+                <span>original_title</span>
+                <div>{movie.original_title}</div>
+              </div>
+
+              <div className="movie--column">
+                <span>popularity</span>
+                <div>{movie.popularity}</div>
+              </div>
+              <div className="movie--column">
+                <span>release_date</span>
+                <div>{movie.release_date}</div>
+              </div>
+              <div className="movie--column">
+                <span>vote_average</span>
+                <div>{movie.vote_average}</div>
+              </div>
+              <div className="movie--column">
+                <span>vote_count</span>
+                <div>{movie.vote_count}</div>
+              </div>
             </div>
           </div>
         </div>

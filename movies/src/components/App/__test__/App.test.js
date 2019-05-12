@@ -1,17 +1,23 @@
 import React from "react";
 import { mount } from "enzyme";
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 import App from "../";
 import { MemoryRouter } from "react-router-dom";
 import { welcomeMessage } from "../../../texts/eng.json";
 
 describe("[Component]: App:", () => {
   let wrapper;
+  const mockStore = configureMockStore([ thunk ]);
 
+let store;
   beforeEach(() => {
+    store = mockStore({});
     wrapper = mount(
-      <MemoryRouter initialEntries={["/"]}>
+      <Provider store={store}>
         <App />
-      </MemoryRouter>
+        </Provider>
     );
   });
 
@@ -20,14 +26,8 @@ describe("[Component]: App:", () => {
   });
 
   describe("Rerders desired components:", () => {
-    test("renders a Link to the Board", () => {
-      expect(wrapper.find("Link").props().to).toBe("/");
-    });
-
-    test("renders a welcome message", () => {
-      expect(
-        wrapper.find(`[data-testid='welcome-message']`).props().children
-      ).toEqual(welcomeMessage);
+    test("renders the Routes component", () => {
+      expect(wrapper.find("Routes").toHaveLength(1);
     });
   });
 });
